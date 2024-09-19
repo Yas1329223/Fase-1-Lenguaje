@@ -1,0 +1,30 @@
+name: Ejecutar pruebas automáticas
+
+# Definir cuándo se ejecutará el workflow
+on:
+  push:
+    branches:
+      - main   # Ejecutar cada vez que hagas un push a la rama principal
+  pull_request:
+    branches:
+      - main   # Ejecutar en cada pull request a la rama principal
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest  # Usar la última versión de Ubuntu como entorno de ejecución
+
+    steps:
+      # Paso 1: Chequear el código del repositorio
+      - name: Chequear el código del repositorio
+        uses: actions/checkout@v2
+
+      # Paso 2: Instalar dependencias (opcional)
+      - name: Instalar dependencias
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # Paso 3: Ejecutar el programa con los archivos de prueba
+      - name: Ejecutar pruebas con archivos
+        run: |
+          # Ejecutar tu script con los archivos de prueba
+          python tu_programa.py GRAMATICA.txt prueba_1.txt prueba_2.txt prueba_3.txt prueba_4.txt
